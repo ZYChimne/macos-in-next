@@ -1,4 +1,4 @@
-# macOS in TypeScript
+# macOS in Next.js
 
 This is my Graduate Capstone Project for Wuhan University.  
 This application is developed in Chrome and some features require Chrome to work correctly.
