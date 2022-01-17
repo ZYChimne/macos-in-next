@@ -1,0 +1,690 @@
+@use '../../utils/colors';
+$menubar-height: 24px;
+$default-padding-regular: 0 12px;
+$default-padding-small: 0 6px;
+$default-menubar-background: rgba(240, 240, 240, 0.9);
+$active-background: rgba(181, 187, 200, 0.9);
+$default-menubar-font-size: 0.81rem;
+$default-menubar-border-radius-small: 1.5px;
+$default-menubar-border-radius-regular: 6px;
+$default-menubar-border-radius-large: 12px;
+$default-border-radius-regular: 6px;
+$default-backdrop-filter-blur: 6px;
+$control-block-background: rgba(233, 234, 234, 0.9);
+$control-box-shadow: 0 0 3px 0px rgba(154, 165, 181, 0.75);
+$default-zindex: 10;
+%item-shared {
+  height: 100%;
+  border-radius: $default-menubar-border-radius-small;
+  &[data-active='true'] {
+    background: $active-background;
+  }
+}
+.menubar {
+  width: 100vw;
+  height: $menubar-height;
+  position: absolute;
+  background: $default-menubar-background;
+  top: 0;
+  z-index: $default-zindex;
+  caret-color: transparent;
+  cursor: default;
+  display: flex;
+  justify-content: space-between;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.menubarLeft {
+  height: 100%;
+  margin-left: 6px;
+  display: flex;
+  align-items: center;
+}
+.menubarRight {
+  height: 100%;
+  margin-right: 6px;
+  display: flex;
+  align-items: center;
+}
+.menubaricon {
+  @extend %item-shared;
+  display: flex;
+  align-items: center;
+  padding: $default-padding-small;
+}
+.menubariconapple {
+  @extend %item-shared;
+  display: flex;
+  align-items: center;
+  padding: $default-padding-regular;
+}
+.menubariconContent {
+  font-size: 0.9rem;
+  color: rgba(30, 31, 30, 1);
+}
+.menubarItem {
+  @extend %item-shared;
+  font-size: $default-menubar-font-size;
+  text-align: center;
+  line-height: $menubar-height;
+  padding: $default-padding-regular;
+}
+.date {
+  @extend %item-shared;
+  line-height: $menubar-height;
+  font-size: $default-menubar-font-size;
+  padding: $default-padding-regular $default-padding-small;
+}
+
+%panel-shared {
+  top: $menubar-height + 6px;
+  width: 282px;
+  position: absolute;
+  padding: 6px 0;
+  backdrop-filter: blur($default-backdrop-filter-blur);
+  background: rgba(238, 239, 239, 0.9);
+  border-radius: $default-menubar-border-radius-large;
+  z-index: 30;
+  flex-direction: column;
+  caret-color: transparent;
+  cursor: default;
+  &[data-show='true'] {
+    display: flex;
+    animation: fadeIn 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  &[data-show='false'] {
+    display: none;
+    animation: fadeOut 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+}
+
+.wifiPanel {
+  @extend %panel-shared;
+  right: 12px;
+}
+%panel-line-shared {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: $default-menubar-border-radius-regular;
+  padding: 3px 6px;
+  margin: 0 6px;
+}
+.panelTitle {
+  font-size: $default-menubar-font-size;
+  font-weight: bold;
+  left: 0;
+}
+.panelSwitch {
+  right: 0;
+}
+.separator {
+  margin: 3px auto;
+  background: $active-background;
+  width: 90%;
+  height: 1px;
+}
+.panelLineNormal {
+  @extend %panel-line-shared;
+}
+.panelLineNormalHover {
+  @extend %panel-line-shared;
+  &:hover {
+    background: $active-background;
+  }
+}
+.panelLineAppleHover {
+  @extend %panel-line-shared;
+  &:hover {
+    background: rgba(colors.$BLUE-LIGHT, 1);
+    color: white;
+  }
+}
+.panelLineBetween {
+  @extend %panel-line-shared;
+  justify-content: space-between;
+}
+.panelLineBetweenHover {
+  @extend %panel-line-shared;
+  justify-content: space-between;
+  &:hover {
+    background: $active-background;
+  }
+}
+.panelSubtitle {
+  color: rgba(grey, 1);
+  font-size: 0.72rem;
+  font-weight: bold;
+  left: 0;
+}
+.panelLeft {
+  display: flex;
+  align-items: center;
+  left: 0px;
+}
+.panelRight {
+  display: flex;
+  align-items: center;
+  right: 0px;
+}
+.panelIconBox {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  &[data-on='true'] {
+    color: white;
+    background: rgba(colors.$BLUE-LIGHT, 1);
+  }
+  &[data-on='false'] {
+    background: rgba(187, 190, 201, 0.9);
+  }
+}
+.panelIcon {
+  font-size: 0.81rem;
+  &[data-on='true'] {
+    color: white;
+  }
+  &[data-on='false'] {
+    color: rgba(66, 69, 76, 1);
+  }
+}
+.panelIconSmall {
+  font-size: 0.72rem;
+  &[data-on='true'] {
+    color: white;
+  }
+  &[data-on='false'] {
+    color: rgba(66, 69, 76, 1);
+  }
+}
+.panelText {
+  font-size: 0.81rem;
+  margin-left: 3px;
+  padding: 3px;
+}
+
+.batteryPanel {
+  @extend %panel-shared;
+  right: 42px;
+}
+
+%input-hover-shared {
+  color: white;
+  background: rgba(colors.$BLUE-LIGHT, 1);
+}
+.inputPanel {
+  @extend %panel-shared;
+  right: 72px;
+}
+.inputLine {
+  @extend %panel-line-shared;
+  &:hover {
+    @extend %input-hover-shared;
+  }
+}
+.inputChecked {
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.focusPanel {
+  @extend %panel-shared;
+  right: 96px;
+}
+.focusLine1 {
+  align-items: center;
+  border-radius: $default-menubar-border-radius-regular;
+  padding: 6px;
+  margin: 0 6px;
+  flex-direction: column;
+}
+.focusChecked {
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bluetoothPanel {
+  @extend %panel-shared;
+  right: 6px;
+}
+.searchPanel {
+  width: 600px;
+  height: 450px;
+  border-radius: 12px;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 30px;
+  bottom: 96px;
+  left: 50%;
+  z-index: 10;
+  margin: auto 0px;
+  transform: translate3d(-50%, 0, 0);
+  overflow: hidden;
+  &[data-show='true'] {
+    display: flex;
+    animation: fadeIn 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  &[data-show='false'] {
+    display: none;
+    animation: fadeOut 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+}
+.searchbar {
+  width: 100%;
+  height: 10%;
+  text-align: center;
+  background: rgba(239, 239, 239, 1);
+  border: none;
+  outline: none;
+  font-size: 24px;
+  color: rgba(70, 70, 70, 1);
+  &::-webkit-input-placeholder {
+    color: rgba(176, 176, 176, 0.9);
+  }
+}
+.searchContent {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(240, 240, 240, 1);
+  align-items: center;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.searchLine {
+  width: 96%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 6px;
+  padding: 3px 0;
+  &[data-active='true'] {
+    color: white;
+    background: rgba(99, 159, 249, 1);
+  }
+}
+.searchLineIcon {
+  height: 24px;
+  width: 24px;
+  border-radius: 6px;
+  margin: 3px;
+}
+.searchLineText {
+  font-size: 12px;
+  text-indent: 6px;
+}
+.controlPanel {
+  top: $menubar-height + 6px;
+  width: 300px;
+  height: 240px;
+  position: absolute;
+  backdrop-filter: blur($default-backdrop-filter-blur);
+  background: rgba(233, 234, 234, 0.6);
+  border-radius: 12px;
+  z-index: 30;
+  flex-direction: column;
+  caret-color: transparent;
+  cursor: default;
+  justify-content: space-evenly;
+  right: 6px;
+  &[data-show='true'] {
+    display: flex;
+    animation: fadeIn 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  &[data-show='false'] {
+    display: none;
+    animation: fadeOut 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+}
+.controlLine1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.controlLine2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: $control-block-background;
+  border-radius: 12px;
+  align-items: center;
+  margin: 0 10px;
+  box-shadow: $control-box-shadow;
+}
+.controlLine1Left {
+  width: 135px;
+  background: $control-block-background;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: $control-box-shadow;
+}
+.controlLine1Right {
+  width: 135px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.controlLine1LeftBlock {
+  display: flex;
+  flex-direction: row;
+  margin: 6px;
+  align-items: center;
+}
+.controlLine1TextBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3px;
+}
+.controlTitle {
+  font-size: 0.81rem;
+  padding: 0 3px;
+}
+.controlSubtitle {
+  font-size: 0.54rem;
+  color: rgba(66, 69, 76, 1);
+  padding: 0 3px;
+}
+.controlLine1RightLine1 {
+  width: 100%;
+  height: 48%;
+  background: $control-block-background;
+  box-shadow: $control-box-shadow;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.controlFocus {
+  display: flex;
+  align-items: center;
+}
+.controlLine1RightLine2 {
+  width: 100%;
+  height: 48%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.controlBlockSmall {
+  height: 100%;
+  width: 48%;
+  background: $control-block-background;
+  box-shadow: $control-box-shadow;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  &[data-active='true'] {
+    background: rgba(colors.$BLUE-LIGHT, 1);
+    color: white;
+  }
+}
+.controlAlbumImgBox {
+  background: rgba(233, 234, 234, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 54px;
+  min-width: 54px;
+  border-radius: 12px;
+  margin: 6px;
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.controlAlbumImg {
+  padding: 3px;
+  font-size: 36px;
+}
+.controlLine2Left {
+  width: 72%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 3px;
+}
+.controlLine2Right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 15%;
+  justify-content: space-between;
+  margin-right: 12px;
+}
+.controlMusicInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 6px;
+}
+.applePanel {
+  top: $menubar-height + 6px;
+  width: 240px;
+  position: absolute;
+  padding: 6px 0;
+  backdrop-filter: blur($default-backdrop-filter-blur);
+  background: $default-menubar-background;
+  border-radius: $default-menubar-border-radius-large;
+  z-index: 30;
+  flex-direction: column;
+  caret-color: transparent;
+  cursor: default;
+  &[data-show='true'] {
+    display: flex;
+    animation: fadeIn 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  &[data-show='false'] {
+    display: none;
+    animation: fadeOut 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  left: 6px;
+}
+.applePanelLine {
+  @extend %panel-line-shared;
+  &:hover {
+    background: $active-background;
+  }
+}
+.notificationPanel {
+  top: $menubar-height + 6px;
+  width: 300px;
+  position: absolute;
+  backdrop-filter: blur($default-backdrop-filter-blur);
+  border-radius: 12px;
+  z-index: 30;
+  flex-direction: column;
+  caret-color: transparent;
+  cursor: default;
+  justify-content: space-evenly;
+  right: 6px;
+  &[data-show='true'] {
+    display: flex;
+    animation: fadeIn 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  &[data-show='false'] {
+    display: none;
+    animation: fadeOut 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+}
+.calendarView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  height: 240px;
+  padding: 6px 0;
+  box-shadow: $control-box-shadow;
+}
+.calendarLine {
+  display: flex;
+  flex-direction: column;
+  width: 96%;
+  justify-content: center;
+  padding: 6px 0;
+}
+.calendarLineDate {
+  font-size: 10px;
+  color: rgba(143, 143, 143, 1);
+  font-weight: bold;
+  text-indent: 6px;
+  padding: 3px;
+}
+.calendarLineContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  background: rgba(245, 235, 249, 1);
+  border-radius: 6px;
+  justify-content: space-between;
+}
+.calendarLineLeft {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6px;
+}
+.calendarLineActive {
+  height: 24px;
+  width: 3px;
+  border-radius: 3px;
+  background: rgba(178, 96, 211, 1);
+  margin: auto 6px;
+}
+.calendarLineTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.calendarLineTitle {
+  font-size: 12px;
+  font-weight: bold;
+  color: rgba(131, 77, 153, 1);
+}
+.calendarLineSubtitle {
+  font-size: 12px;
+  color: rgba(154, 109, 173, 1);
+}
+.calendarLineRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6px;
+}
+.weatherView {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 12px;
+  background: linear-gradient(
+    to right bottom,
+    rgba(49, 101, 204, 1),
+    rgba(148, 185, 212, 1)
+  );
+  width: 100%;
+  margin-top: 12px;
+  box-shadow: $control-box-shadow;
+}
+.weatherHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.weatherHeaderLeft {
+  margin: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.weatherCityName {
+  font-size: 18px;
+  color: white;
+}
+.weatherHeaderRight {
+  margin: 12px;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  justify-content: center;
+}
+.weatherTitle {
+  font-size: 36px;
+  color: white;
+}
+.weatherSubtitle {
+  color: white;
+  font-size: 12px;
+}
+.weatherHeaderIcon {
+  height: 24px;
+  width: 24px;
+  padding: 3px;
+}
+.weatherContent {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.weatherContentCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 0;
+}
+.weatherContentDate {
+  font-size: 12px;
+  color: rgba(204, 220, 231, 1);
+  padding: 3px;
+}
+.weatherContentIcon {
+  height: 20px;
+  width: 20px;
+  padding: 3px;
+}
+.weatherContentTemp {
+  font-size: 14px;
+  color: white;
+  padding: 3px;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

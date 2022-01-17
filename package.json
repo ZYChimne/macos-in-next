@@ -6,17 +6,33 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.16",
     "date-fns": "^2.11.1",
     "gray-matter": "^4.0.2",
+    "marked": "^4.0.8",
     "next": "latest",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "node-sass": "^6.0.1",
+    "react": "^17.0.2",
+    "react-bmapgl": "^0.1.28",
+    "react-dom": "^17.0.2",
     "remark": "^14.0.1",
-    "remark-html": "^15.0.0"
+    "remark-html": "^15.0.0",
+    "sass": "^1.43.4",
+    "sass-loader": "^12.3.0",
+    "tslib": "^2.3.1",
+    "web-vitals": "^1.1.2"
   },
   "devDependencies": {
+    "@types/bmapgl": "^0.0.5",
+    "@types/marked": "^4.0.1",
     "@types/node": "^16.3.3",
     "@types/react": "^17.0.14",
-    "typescript": "^4.3.5"
+    "@types/react-dom": "^17.0.11",
+    "typescript": "^4.5.4"
   }
 }

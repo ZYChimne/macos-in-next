@@ -1,0 +1,183 @@
+.notes {
+  width: 810px;
+  height: 480px;
+  border-radius: 12px;
+  flex-direction: row;
+  position: absolute;
+  top: 30px;
+  bottom: 78px;
+  left: 50%;
+  z-index: 10;
+  margin: auto 0px;
+  transform: translate3d(-50%, 0, 0);
+  overflow: hidden;
+  &[data-show='true'] {
+    display: flex;
+    animation: fadeIn 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  &[data-show='false'] {
+    display: none;
+    animation: fadeOut 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+}
+.appBar {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(198, 198, 200, 1);
+}
+.appBarHeader {
+  width: 100%;
+  height: 10%;
+  background: rgba(250, 250, 250, 1);
+  border-bottom: 1px solid rgba(217, 216, 209, 1);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.appBarContent {
+  width: 100%;
+  height: 90%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.appBarBtnContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+}
+.appBarLine {
+  width: 90%;
+  height: 54px;
+  border-radius: 6px;
+  margin: 6px 0;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &[data-active='true'] {
+    background: rgba(251, 228, 155, 1);
+  }
+}
+.appBarLineTitle {
+  width: 180px;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(39, 39, 39, 1);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.appBarLineSubtitle {
+  width: 180px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.appBarLineDate {
+  display: flex;
+  flex-direction: row;
+  width: 81px;
+  font-size: 12px;
+  color: rgba(39, 39, 39, 1);
+}
+.appBarLinePre {
+  font-size: 12px;
+  width: 96px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: rgba(128, 128, 128, 1);
+}
+.appBarLineIcon {
+  font-size: 12px;
+}
+.appBarLineFolder {
+  width: 180px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.appBarLineIcon {
+  padding: 0 3px;
+  font-size: 12px;
+  color: rgba(128, 128, 128, 1);
+}
+.content {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+}
+.notesBar {
+  width: 100%;
+  height: 10%;
+  background: rgba(250, 250, 250, 1);
+  border-bottom: 1px solid rgba(217, 216, 209, 1);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.notesBarIconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+.notesBarIcon {
+  color: rgba(107, 107, 107, 1);
+  font-size: 14px;
+}
+.searchbar {
+  width: 144px;
+  height: 24px;
+  margin: 0 6px;
+  text-align: center;
+  background: rgba(250, 250, 250, 1);
+  border: solid 1px rgba(238, 237, 237, 1);
+  border-radius: 6px;
+  outline: none;
+  color: rgba(70, 70, 70, 1);
+  &::-webkit-input-placeholder {
+    color: rgba(176, 176, 176, 0.9);
+  }
+}
+.notesContent {
+  display: block;
+  height: 90%;
+  width: 90%;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.notesSubtitle {
+  font-size: 0.81rem;
+  color: rgba(176, 176, 176, 1);
+  padding: 3px;
+  margin-left: 12px;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

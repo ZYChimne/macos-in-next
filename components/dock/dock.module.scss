@@ -1,0 +1,22 @@
+.dock {
+  background-color: rgba(247, 247, 248, 0.25);
+  position: absolute;
+  bottom: 6px;
+  width: fit-content;
+  left: 0;
+  right: 0;
+  border-radius: 12px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  z-index: 30;
+  backdrop-filter: blur(12px);
+  padding: 0 3px;
+  caret-color: transparent;
+  cursor: default;
+  max-width: 90vw;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

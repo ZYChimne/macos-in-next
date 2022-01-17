@@ -1,0 +1,160 @@
+@use './colors.scss';
+.switch {
+  height: 24px;
+  width: 48px;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+}
+.switchInput {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+.switchCore {
+  position: absolute;
+  height: 24px;
+  width: 48px;
+  display: flex;
+  background-color: rgba(grey, 0.25);
+  border-radius: 30px;
+  transition: 0.5s;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 15px;
+    background-color: white;
+    transition: 0.5s;
+  }
+  .switchInput:checked + & {
+    background-color: rgba(colors.$BLUE-LIGHT, 1);
+  }
+  .switchInput:checked + &:after {
+    left: calc(100% - 3px);
+    transform: translateX(-100%);
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  &[data-type='Dock'] {
+    padding: 3px;
+    margin: 3px;
+    flex-direction: column;
+  }
+  &[data-type='Launchpad'] {
+    width: 12vw;
+    height: 15vh;
+    flex-direction: column;
+  }
+}
+.iconImg {
+  &[data-type='Dock'] {
+    width: 54px;
+    height: 54px;
+    border-radius: 6px;
+  }
+  &[data-type='Launchpad'] {
+    width: 6vw;
+    height: 6vw;
+    border-radius: 6px;
+  }
+}
+.iconText {
+  &[data-type='Launchpad'] {
+    font-size: 12px;
+    color: white;
+  }
+}
+.dockIconActive {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background: rgba(30, 30, 30, 0.6);
+  &[data-active='true'] {
+    display: block;
+  }
+  &[data-active='false'] {
+    display: none;
+  }
+}
+%tooltip-shared {
+  display: none;
+  position: absolute;
+  bottom: 72px;
+  left: 50%;
+}
+%tooltip-hover-shared {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+}
+// [data-tooltip] {
+//   position: relative;
+//   &::before {
+//     @extend %tooltip-shared;
+//     margin-bottom: 6px;
+//     padding: 6px;
+//     border-radius: 6px;
+//     background: rgba(white, 0.75);
+//     content: attr(data-tooltip);
+//     font-size: 0.72rem;
+//     transform: translateX(-50%);
+//     white-space: nowrap;
+//   }
+//   &::after {
+//     @extend %tooltip-shared;
+//     margin-left: -6px;
+//     width: 0;
+//     border-top: 6px solid rgba(white, 0.75);
+//     border-right: 6px solid transparent;
+//     border-left: 6px solid transparent;
+//     content: '';
+//   }
+//   &:hover {
+//     &::before {
+//       @extend %tooltip-hover-shared;
+//     }
+//     &::after {
+//       @extend %tooltip-hover-shared;
+//     }
+//   }
+// }
+.appBarButtonContainer {
+  display: flex;
+  flex-direction: row;
+}
+%appbar-btn-shared {
+  color: black;
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3px;
+}
+.closeBtn {
+  @extend %appbar-btn-shared;
+  background: rgba(colors.$RED-LIGHT, 1);
+}
+.minBtn {
+  @extend %appbar-btn-shared;
+  background: rgba(colors.$YELLOW-LIGHT, 1);
+}
+.maxBtn {
+  @extend %appbar-btn-shared;
+  background: rgba(colors.$GREEN-LIGHT, 1);
+}
+.appbarBtn {
+  font-size: 9px;
+  color: rgba(30, 30, 30, 0.75);
+}
